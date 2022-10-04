@@ -1,0 +1,27 @@
+torch
+torchvision
+pytorch-lightning==1.1.5
+einops==0.3.0
+test-tube==0.7.5
+kornia==0.4.1
+opencv-python
+matplotlib
+jupyter
+imageio
+imageio-ffmpeg
+pandas
+torch_optimizer
+
+# for phototourism visualization
+plotly
+
+# for mesh
+PyMCubes==0.1.2
+pycollada==0.7.1
+trimesh==3.9.1
+pyglet==1.5.10
+networkx==2.5
+
+# for point cloud
+plyfile
+open3d
