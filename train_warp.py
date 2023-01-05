@@ -126,7 +126,7 @@ class NeRFSystem(LightningModule):
         self.train_dataset = dataset(split='train', **kwargs)
         self.val_dataset = dataset(split='val', **kwargs)
         if self.train_dataset.use_edge:
-            print("Using EDGE!")
+            print("Using Recurring Edge Constraint (REC).")
         # self.images_dataset = dataset_dict['wholeImage']
         
 
