@@ -2,6 +2,8 @@
 
 This is the implementation of NeurIPS 2022 paper [Neural Transmitted Radiance Fields](https://openreview.net/pdf?id=KglFYlTiASW).
 
+## Errata
+- In Eq.(7) and (8), $k$ denotes the total number of **views**, instead of pixels.
 
 ## Demo
 | ![](demo/input_example.jpg) |  ![](demo/ours_sofa.gif)  | ![](demo/gt_sofa.gif) |
