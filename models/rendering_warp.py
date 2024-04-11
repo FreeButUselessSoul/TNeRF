@@ -45,6 +45,8 @@ def homo_warp_with_depth(src_feat, proj_mat, depth_values, src_grid=None, ref_g=
         ref_grid = create_meshgrid(H_pad, W_pad, normalized_coordinates=False, device=device)  # (1, H, W, 2)
         if pad>0:
             ref_grid -= pad
+        ref_grid[...,0] = ref_grid[...,0] / ((W - 1) / 2) - 1  # scale to -1~1
+        ref_grid[...,1] = ref_grid[...,1] / ((H - 1) / 2) - 1
     else:
         ref_grid = ref_g
         H_pad,W_pad = ref_g.shape[1:3]
@@ -60,8 +62,7 @@ def homo_warp_with_depth(src_feat, proj_mat, depth_values, src_grid=None, ref_g=
 
     src_grid = src_grid_d[:, :2] / src_grid_d[:, 2:]  # divide by depth (B, 2, D*H*W)
     del src_grid_d
-    src_grid[:, 0] = src_grid[:, 0] / ((W - 1) / 2) - 1  # scale to -1~1
-    src_grid[:, 1] = src_grid[:, 1] / ((H - 1) / 2) - 1  # scale to -1~1
+    src_grid = torch.clamp(src_grid, -1, 1) # Clamp to -1 ~ 1
     src_grid = src_grid.permute(0, 2, 1)  # (B, D*H*W, 2)
     src_grid = src_grid.view(B, D, W_pad * H_pad, 2)
     warped_src_feat = F.grid_sample(src_feat, src_grid,
